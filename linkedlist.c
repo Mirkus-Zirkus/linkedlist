@@ -8,7 +8,7 @@
 void push(node_t **head, double data) {
     node_t *new_node = malloc(sizeof(node_t));
     if (new_node == NULL) {
-        printf("push: memory allocation failed\n");
+        return;
     }
     new_node->data = data;
     new_node->next = *head;
@@ -17,7 +17,7 @@ void push(node_t **head, double data) {
 
 double pop(node_t **head) {
     if (*head == NULL) {
-        printf("pop: empty\n");
+        return 0.0;
     }
     node_t *temp = *head;
     double data = temp->data;
@@ -28,13 +28,11 @@ double pop(node_t **head) {
 
 void insert_at(node_t **head, double data, int index) {
     if (index < 1) {
-        printf("add: index out of range\n");
         return;
     }
 
     node_t *new_node = malloc(sizeof(node_t));
     if (new_node == NULL) {
-        printf("add: memory allocation failed\n");
         return;
     }
     new_node->data = data;
@@ -48,7 +46,6 @@ void insert_at(node_t **head, double data, int index) {
     node_t *current = *head;
     for (int i = 1; i < index - 1; i++) {
         if (current == NULL) {
-            printf("add: index out of range\n");
             free(new_node);
             return;
         }
@@ -56,7 +53,6 @@ void insert_at(node_t **head, double data, int index) {
     }
 
     if (current == NULL) {
-        printf("add: index out of range\n");
         free(new_node);
         return;
     }
@@ -70,7 +66,7 @@ void insert_at(node_t **head, double data, int index) {
 void insert_at_end(node_t **head, double data) {
     node_t *new_node = malloc(sizeof(node_t));
     if (new_node == NULL) {
-        printf("add: memory allocation failed\n");
+        return;
     }
 
     if (*head == NULL) {
@@ -89,7 +85,6 @@ void insert_at_end(node_t **head, double data) {
 
 double remove_at_end(node_t **head) {
     if (head == NULL || *head == NULL) {
-        printf("remove_at_end: empty\n");
         return 0.0;
     }
     node_t *current = *head;
@@ -113,7 +108,6 @@ double remove_at_end(node_t **head) {
 
 double remove_at(node_t **head, int index) {
     if (index < 1) {
-        printf("remove_at: index out of range\n");
         return 0.0;
     }
 
@@ -122,21 +116,18 @@ double remove_at(node_t **head, int index) {
     }
 
     if (*head == NULL) {
-        printf("remove_at: Liste ist leer\n");
         return 0.0;
     }
 
     node_t *current = *head;
     for (int i = 1; i < index - 1; i++) {
         if (current->next == NULL) {
-            printf("remove_at: index out of range\n");
             return 0.0;
         }
         current = current->next;
     }
     node_t *to_remove = current->next;
     if (to_remove == NULL) {
-        printf("remove_at: index out of range\n");
         return 0.0;
     }
     double data = to_remove->data;
@@ -149,7 +140,7 @@ double remove_at(node_t **head, int index) {
 
 node_t *search(node_t **head, double data) {
     if (head == NULL) {
-        printf("search: empty\n");
+        return NULL;
     }
     node_t *current = *head;
     while (current != NULL) {
@@ -159,4 +150,16 @@ node_t *search(node_t **head, double data) {
         current = current->next;
     }
     return NULL;
+}
+
+array_t export (node_t **head) {
+    array_t result;
+    if (head == NULL) {
+        return result;
+    }
+    node_t *current = *head;
+    for (int i = 0; current != NULL; i++) {
+        current->data = result.array[i];
+    }
+    return result;
 }

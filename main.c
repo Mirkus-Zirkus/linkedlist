@@ -11,6 +11,8 @@ int main(void) {
     push(&head, 4.0);
     insert_at(&head, 5.0, 3);
     insert_at_end(&head, 67);
+    printf("\n");
+    search(&head, 2);
 
     printf("SEARCH: %f\n", search(&head, 5)->data);;
     printf("REMOVED %f\n", remove_at_end(&head));
