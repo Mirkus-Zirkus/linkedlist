@@ -4,162 +4,181 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-
-void push(node_t **head, double data) {
+bool ll_push(node_t **head, double data) {
+    if (head == NULL) {
+        return false;
+    }
     node_t *new_node = malloc(sizeof(node_t));
     if (new_node == NULL) {
-        return;
+        return false;
     }
+
     new_node->data = data;
     new_node->next = *head;
     *head = new_node;
+    return true;
 }
 
-double pop(node_t **head) {
-    if (*head == NULL) {
-        return 0.0;
+bool ll_pop(node_t **head, double *result_data) {
+    if (head == NULL || *head == NULL) {
+        return false;
     }
     node_t *temp = *head;
-    double data = temp->data;
+    if (result_data != NULL) {
+        *result_data = temp->data;
+    }
     *head = temp->next;
     free(temp);
-    return data;
+    return true;
 }
 
-void insert_at(node_t **head, double data, int index) {
-    if (index < 1) {
-        return;
+bool ll_insert_at(node_t **head, double data, int index) {
+    if (head == NULL || index < 1) {
+        return false;
     }
 
     node_t *new_node = malloc(sizeof(node_t));
     if (new_node == NULL) {
-        return;
+        return false;
     }
     new_node->data = data;
 
     if (index == 1) {
         new_node->next = *head;
         *head = new_node;
-        return;
+        return true;
     }
 
     node_t *current = *head;
     for (int i = 1; i < index - 1; i++) {
         if (current == NULL) {
             free(new_node);
-            return;
+            return false;
         }
         current = current->next;
     }
 
     if (current == NULL) {
         free(new_node);
-        return;
+        return false;
     }
 
     new_node->next = current->next;
     current->next = new_node;
+    return true;
 }
 
-
-
-void insert_at_end(node_t **head, double data) {
-    node_t *new_node = malloc(sizeof(node_t));
-    if (new_node == NULL) {
-        return;
+bool ll_insert_at_end(node_t **head, double data) {
+    if (head == NULL) {
+        return false;
     }
 
-    if (*head == NULL) {
-        *head = new_node;
-        return;
+    node_t *new_node = malloc(sizeof(node_t));
+    if (new_node == NULL) {
+        return false;
     }
 
     new_node->data = data;
+    new_node->next = NULL;
+
+    if (*head == NULL) {
+        *head = new_node;
+        return true;
+    }
+
     node_t *current = *head;
     while (current->next != NULL) {
         current = current->next;
     }
     current->next = new_node;
-
+    return true;
 }
 
-double remove_at_end(node_t **head) {
+bool ll_remove_at_end(node_t **head, double *result_data) {
     if (head == NULL || *head == NULL) {
-        return 0.0;
+        return false;
     }
     node_t *current = *head;
 
     if (current->next == NULL) {
-        double data = current->data;
+        if (result_data != NULL) {
+            *result_data = current->data;
+        }
         free(current);
         *head = NULL;
-        return data;
+        return true;
     }
     while (current->next->next != NULL) {
         current = current->next;
     }
     node_t *last = current->next;
-    double data = last->data;
+    if (result_data != NULL) {
+        *result_data = last->data;
+    }
 
     free(last);
     current->next = NULL;
-    return data;
+    return true;
 }
 
-double remove_at(node_t **head, int index) {
-    if (index < 1) {
-        return 0.0;
+bool ll_remove_at(node_t **head, int index, double *result_data) {
+    if (head == NULL || index < 1) {
+        return false;
     }
 
     if (index == 1) {
-        return pop(head);
+        return ll_pop(head, result_data);
     }
 
     if (*head == NULL) {
-        return 0.0;
+        return false;
     }
 
     node_t *current = *head;
     for (int i = 1; i < index - 1; i++) {
         if (current->next == NULL) {
-            return 0.0;
+            return false;
         }
         current = current->next;
     }
     node_t *to_remove = current->next;
     if (to_remove == NULL) {
-        return 0.0;
+        return false;
     }
-    double data = to_remove->data;
+    if (result_data != NULL) {
+        *result_data = to_remove->data;
+    }
     current->next = to_remove->next;
     free(to_remove);
 
-    return data;
+    return true;
 }
 
-
-node_t *search(node_t **head, double data) {
+bool ll_search(node_t **head, double data, node_t **result_node) {
     if (head == NULL) {
-        return NULL;
+        return false;
     }
     node_t *current = *head;
     while (current != NULL) {
         if (current->data == data) {
-            return current;
+            if (result_node != NULL) {
+                *result_node = current;
+            }
+            return true;
         }
         current = current->next;
     }
-    return NULL;
+    return false;
 }
 
-array_t export (node_t **head) {
-    array_t result;
+bool ll_clear(node_t **head) {
     if (head == NULL) {
-        return result;
+        return false;
     }
     node_t *current = *head;
-    for (int i = 0; current != NULL; i++) {
-        current->data = result.array[i];
+    node_t *previous = *head;
+    while (*head != NULL) {
+
     }
-    return result;
+
 }
