@@ -20,5 +20,6 @@ bool ll_insert_at_end(node_t **head, double data);
 bool ll_remove_at_end(node_t **head, double *result_data);
 bool ll_search(node_t **head, double data, node_t **result_node);
 bool ll_clear(node_t **head);
+bool ll_export(node_t **head, int *out_size, double **array);
 
 #endif //LINKEDLIST_LINKEDLIST_H

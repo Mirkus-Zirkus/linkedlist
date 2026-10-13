@@ -30,5 +30,9 @@ bool dll_pop(node_t **head, double *data) {
     if (data != NULL) {
         *data = temp->data;
     }
+    *head = temp->next;
+    *temp->next->prev = NULL;
+    free(temp);
+    return true;
 
 }

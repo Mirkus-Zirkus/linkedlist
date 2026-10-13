@@ -176,9 +176,40 @@ bool ll_clear(node_t **head) {
         return false;
     }
     node_t *current = *head;
-    node_t *previous = *head;
+    node_t *next_node = NULL;
     while (*head != NULL) {
-
+        next_node = current->next;
+        free(current);
+        current = next_node;
     }
 
+}
+
+bool ll_export(node_t **head, int *out_size, double **array) {
+    if (head == NULL || out_size == NULL || array == NULL) {
+        return false;
+    }
+    int count = 0;
+    node_t *current = *head;
+    while (current != NULL) {
+        count++;
+        current = current->next;
+    }
+    *out_size = count;
+    if (count == 0) {
+        *array = NULL;
+        return false;
+    }
+    *array = malloc(count * sizeof(double));
+    if (*array == NULL) {
+        *out_size = 0;
+        return false;
+    }
+
+    current = *head;
+    for (int i = 0; i < count; i++) {
+        (*array)[i] = current->data;
+        current = current->next;
+    }
+    return true;
 }
