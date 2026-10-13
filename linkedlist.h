@@ -12,8 +12,6 @@ typedef struct node_t {
 } node_t;
 
 
-
-
 bool ll_push(node_t **head, double data);
 bool ll_pop(node_t **head, double *result_data);
 bool ll_insert_at(node_t **head, double data, int index);
