@@ -74,7 +74,7 @@ int main() {
 
     printf("=== PERFORMANCE-BENCHMARK ===\n");
 
-    int N = 10000;
+    int32_t N = 10000;
     clock_t start, end;
     double cpu_time;
 
