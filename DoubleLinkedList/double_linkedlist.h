@@ -17,6 +17,7 @@ typedef struct {
     dll_node_t* tail;
     int size;
 } LinkedList;
+
 bool dll_push(dll_node_t **head, double data);
 bool dll_pop(dll_node_t **head, double *result_data);
 bool dll_insert_at(dll_node_t **head, double data, int index);
