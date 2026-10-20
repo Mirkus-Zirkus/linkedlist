@@ -29,6 +29,9 @@ int main() {
         printf("1  A eingeben (Hex)\n");
         printf("2  B eingeben (Hex)\n");
         printf("3  A = A + B\n");
+        printf("4  A UND B\n");
+        printf("5  A OR B\n");
+        printf("6  A XOR B\n");
         printf("0  Ende\n");
         printf("Deine Wahl: ");
 
@@ -59,13 +62,25 @@ int main() {
                 A = A + B;
                 break;
 
+            case 4:
+                A = A & B;
+                break;
+
+            case 5:
+                A = A || B;
+                break;
+
+            case 6:
+                A = A ^ B;
+                break;
+
             case 0:
                 printf("Programm wird beendet.\n");
                 break;
 
             default:
                 printf("Falscher Menüpunkt! Bitte einen gültigen Menüpunkt wählen.\n");
-                break;
+
         }
 
     } while (wahl != 0);
