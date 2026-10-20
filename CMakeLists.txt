@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 4.3)
-project(linkedlist C)
+project(DatenTypen C)
 
 set(CMAKE_C_STANDARD 11)
 
 add_executable(linkedlist main.c
-        linkedlist.h
-        linkedlist.c
-        double_linkedlist.c
-        double_linkedlist.h)
+        LinkedList/linkedlist.h
+        LinkedList/linkedlist.c
+        DoubleLinkedList/double_linkedlist.h
+        DoubleLinkedList/double_linkedlist.c)

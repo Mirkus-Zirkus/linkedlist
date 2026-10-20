@@ -58,11 +58,6 @@ bool ll_insert_at(node_t **head, double data, int index) {
         current = current->next;
     }
 
-    if (current == NULL) {
-        free(new_node);
-        return false;
-    }
-
     new_node->next = current->next;
     current->next = new_node;
     return true;
@@ -182,6 +177,8 @@ bool ll_clear(node_t **head) {
         free(current);
         current = next_node;
     }
+    *head = NULL;
+    return true;
 
 }
 
