@@ -3,7 +3,7 @@ project(DatenTypen C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(linkedlist main.c
+add_executable(DatenTypen main.c
         LinkedList/linkedlist.h
         LinkedList/linkedlist.c
         DoubleLinkedList/double_linkedlist.h

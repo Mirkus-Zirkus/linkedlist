@@ -171,15 +171,13 @@ bool ll_clear(node_t **head) {
         return false;
     }
     node_t *current = *head;
-    node_t *next_node = NULL;
-    while (*head != NULL) {
-        next_node = current->next;
+    while (current != NULL) {
+        node_t *next_node = current->next;
         free(current);
         current = next_node;
     }
     *head = NULL;
     return true;
-
 }
 
 bool ll_export(node_t **head, int *out_size, double **array) {
