@@ -97,6 +97,88 @@ int main() {
                 A = A << B;
                 break;
 
+            case 10:
+                while (true) {
+                    printf("Bitnummer eingeben: ");
+                    u_int8_t bitnr;
+                    if (scanf("%hhu", &bitnr)!=1) {
+                        printf("Ungültige Eingabe\n");
+                        while (getchar() != '\n');
+                        continue;
+                    };
+
+                    if (bitnr >= 0 && bitnr <= 15) {
+                        A |= (1 << bitnr);
+                    }
+                    else {
+                        printf("Ungültige Eingabe\n");
+                        continue;
+                    }
+                    break;
+                }
+                break;
+
+            case 11:
+                while (true) {
+                    printf("Bitnummer eingeben: ");
+                    u_int8_t bitnr;
+                    if (scanf("%hhu", &bitnr)!=1) {
+                        printf("Ungültige Eingabe\n");
+                        while (getchar() != '\n');
+                        continue;
+                    };
+
+                    if (bitnr >= 0 && bitnr <= 15) {
+                        A &= ~(1 << bitnr);
+                    }
+                    else {
+                        printf("Ungültige Eingabe\n");
+                        continue;
+                    }
+                    break;
+                }
+                break;
+
+            case 12: {
+                while (true) {
+                    uint8_t bitnr;
+                    printf("Bitnummer eingeben: ");
+                    if (scanf("%hhu", &bitnr) != 1) {
+                        printf("Ungültige Eingabe\n");
+                        while (getchar() != '\n');
+                        continue;
+                    }
+                    if (bitnr <= 15) {
+                        A ^= (1 << bitnr);
+                    } else {
+                        printf("Ungültige Eingabe! Nur Werte von 0 bis 15 erlaubt.\n");
+                        continue;
+                    }
+                    break;
+                }
+                break;
+            }
+
+            case 13:
+                while (true) {
+                    printf("Bitnummer eingeben: ");
+                    u_int8_t bitnr;
+                    if (scanf("%hhu", &bitnr)!=1) {
+                        printf("Ungültige Eingabe\n");
+                        while (getchar() != '\n');
+                        continue;
+                    };
+
+                    if (bitnr >= 0 && bitnr <= 15) {
+                        printf ("Bit %hhu ist %hhu.\n", bitnr, (A >> bitnr) & 1);
+                    }
+                    else {
+                        printf("Ungültige Eingabe\n");
+                        continue;
+                    }
+                    break;
+                }
+                break;
 
             case 0:
                 printf("Programm wird beendet.\n");
