@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <stdbool.h>
+#include <sys/types.h>
 
 void print_bits16(uint16_t val) {
     for (int i = 15; i >= 0; i--) {
@@ -32,13 +34,22 @@ int main() {
         printf("4  A UND B\n");
         printf("5  A OR B\n");
         printf("6  A XOR B\n");
+        printf("7  !A\n");
+        printf("8  A um B Stellen nach rechts\n");
+        printf("9  A um B Stellen nach links\n");
+        printf("10 Beliebiges Bit in A auf 1 setzen\n");
+        printf("11 Beliebiges Bit in A auf 0 setzen\n");
+        printf("12 Beliebiges Bit in A umschalten\n");
+        printf("13 Ausgabe beliebiges Bit in A\n");
         printf("0  Ende\n");
+
+        printf("----------------------------------------\n");
+
         printf("Deine Wahl: ");
 
-        if (scanf("%d", &wahl) != 1) {
-            printf("Fehler: Bitte eine gültige Zahl eingeben!\n");
+        if (scanf("%d", &wahl)!=1) {
+            wahl = -1;
             while (getchar() != '\n');
-            continue;
         }
 
         switch (wahl) {
@@ -74,13 +85,26 @@ int main() {
                 A = A ^ B;
                 break;
 
+            case 7:
+                A = ~A;
+                break;
+
+            case 8:
+                A = A >> B;
+                break;
+
+            case 9:
+                A = A << B;
+                break;
+
+
             case 0:
                 printf("Programm wird beendet.\n");
                 break;
 
             default:
                 printf("Falscher Menüpunkt! Bitte einen gültigen Menüpunkt wählen.\n");
-
+                break;
         }
 
     } while (wahl != 0);
