@@ -3,4 +3,6 @@ project(Regelkreis C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Regelkreis main.c)
+add_executable(Regelkreis main.c
+        zweipunktregler.c
+        ReglerHeader.h)
