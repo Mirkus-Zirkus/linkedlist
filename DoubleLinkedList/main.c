@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "DoubleLinkedList/double_linkedlist.h"
-#include "LinkedList/linkedlist.h"
+#include "double_linkedlist.h"
+#include "../LinkedList/linkedlist.h"
 
 void print_list(node_t *head) {
     node_t *current = head;
