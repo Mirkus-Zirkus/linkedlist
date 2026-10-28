@@ -16,7 +16,7 @@ int main() {
 
     for (int t = 0; t < 10; t++) {
         printf("     %2d      |   %5.2f °C\n", t, istZustand);
-        if (zweipunktregler(istZustand, sollZustand, epsilon, aktuellerZustand)==1) {
+        if (zweipunkt_regler(istZustand, sollZustand, epsilon, aktuellerZustand)==1) {
 
         }
     }

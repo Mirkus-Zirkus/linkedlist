@@ -1,3 +1,6 @@
+
+#include "ReglerHeader.h"
+
 int zweipunkt_regler(double istZustand, double sollZustand, double epsilon, int aktuellerZustand) {
     if (istZustand < (sollZustand - epsilon)) {
         return 1; // AN

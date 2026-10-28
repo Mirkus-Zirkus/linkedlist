@@ -2,7 +2,6 @@
 // Created by mirko on 10/27/26.
 //
 
-#include "ReglerHeader.h"
 
 #ifndef REGELKREIS_REGLERHEADER_H
 #define REGELKREIS_REGLERHEADER_H
