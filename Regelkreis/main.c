@@ -4,12 +4,28 @@
 int main() {
     double istZustand = 18.0;
     double sollZustand = 20.0;
-    double abkuehlungsRate = 0.5;
-    double epsilon = 1;
-    __uint8_t aktuellerZustand = 1;
-    __uint64_t schritte = 100;
+    double heizLeistung = 0.75;    /* Erwärmung pro Schritt bei 100 % Stellgröße */
+    double abkuehlungsRate = 0.25; // Wärmeverlust pro Schritt
 
-    printf("=== Einfache Temperatur-Simulation (Ohne Regler) ===\n");
+    double epsilon = 1.0;
+    int aktuellerZustand = 1;
+
+    PIDRegler pid;
+    pid_init(&pid, 0.5, 0.1, 0.1, 1.0, 0.0, 1.0); /* Kp, Ki, Kd, dt, min, max */
+
+    int auswahl = 0;
+    printf("Welchen Regler moechtest du verwenden?\n");
+    printf("  1 = Zweipunkt-Regler\n");
+    printf("  2 = PID-Regler\n");
+    printf("Auswahl: ");
+    if (scanf("%d", &auswahl) != 1 || (auswahl != 1 && auswahl != 2)) {
+        fprintf(stderr, "Ungueltige Auswahl.\n");
+        return 1;
+    }
+
+    const char *reglerName = (auswahl == 1) ? "Zweipunkt-Regler" : "PID-Regler";
+
+    printf("\n=== Temperatur-Simulation (%s) ===\n", reglerName);
     printf("Soll-Zustand: %.1f °C\n", sollZustand);
     printf("--------------------------------------------------\n");
     printf(" Zeitschritt |  Ist-Zustand\n");
@@ -22,16 +38,20 @@ int main() {
     }
 
     for (int t = 0; t <= 20; t++) {
-        aktuellerZustand = zweipunkt_regler(istZustand, sollZustand, epsilon, aktuellerZustand);
+        double stellgroesse;
 
-        fprintf(fp, "%d;%.2f;%.2f;%s\n", t, istZustand, sollZustand, (aktuellerZustand == 1) ? "AN" : "AUS");
-        printf("Zeitschritt %2d | Ist: %5.2f °C | Status: %s\n", t, istZustand, (aktuellerZustand == 1) ? "AN" : "AUS");
-
-        if (aktuellerZustand == 1) {
-            istZustand += abkuehlungsRate;
+        if (auswahl == 1) {
+            aktuellerZustand = zweipunkt_regler(istZustand, sollZustand, epsilon, aktuellerZustand);
+            stellgroesse = (aktuellerZustand == 1) ? 1.0 : 0.0;
         } else {
-            istZustand -= (abkuehlungsRate / 2.0);
+            stellgroesse = pid_berechne(&pid, istZustand, sollZustand);
         }
+
+        fprintf(fp, "%d;%.2f;%.2f;%.2f\n", t, istZustand, sollZustand, stellgroesse);
+        printf("Zeitschritt %2d | Ist: %5.2f °C | Stellgröße: %4.0f %%\n",
+               t, istZustand, stellgroesse * 100.0);
+
+        istZustand += stellgroesse * heizLeistung - abkuehlungsRate;
     }
     fclose(fp);
 
