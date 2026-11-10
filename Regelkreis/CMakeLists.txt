@@ -5,4 +5,5 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(Regelkreis main.c
         zweipunktregler.c
-        ReglerHeader.h)
+        ReglerHeader.h
+        pidregler.c)

@@ -8,4 +8,22 @@
 
 int zweipunkt_regler(double istZustand, double sollZustand, double epsilon, int aktuellerZustand);
 
-#endif //REGELKREIS_REGLERHEADER_H
+
+typedef struct {
+    double kp;
+    double ki;
+    double kd;
+    double dt;
+    double integral;
+    double letzterFehler;
+    double outMin;
+    double outMax;
+    int initialisiert;
+} PIDRegler;
+
+void pid_init(PIDRegler *pid, double kp, double ki, double kd,
+                double dt, double outMin, double outMax);
+double pid_berechne(PIDRegler *pid, double istZustand, double sollZustand);
+
+#endif
+
