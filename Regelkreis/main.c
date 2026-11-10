@@ -4,7 +4,7 @@
 int main() {
     double istZustand = 18.0;
     double sollZustand = 20.0;
-    double heizLeistung = 0.75;    /* Erwärmung pro Schritt bei 100 % Stellgröße */
+    double heizLeistung = 0.75;    // Erwärmung pro Schritt bei 100 % Stellgröße
     double abkuehlungsRate = 0.25; // Wärmeverlust pro Schritt
 
     double epsilon = 1.0;
